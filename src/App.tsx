@@ -5,9 +5,10 @@ import { DataContextProvider } from './lib/context';
 import './styles/globals.css';
 import { Payment } from './components/BudgetTable/DataTable/types';
 import AddExpense from './components/AddExpense';
+import { mockData } from './lib/utils';
 
 function App() {
-  const [data, setData] = useState<Payment[]>();
+  const [data, setData] = useState<Payment[]>([...mockData]);
   return (
     //@ts-ignore
     <DataContextProvider value={{ data, setData }}>

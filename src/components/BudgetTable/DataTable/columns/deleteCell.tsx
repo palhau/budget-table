@@ -1,6 +1,5 @@
 import { TrashIcon } from 'lucide-react';
 import { Button } from '../../../ui/button';
-import React from 'react';
 
 //@ts-ignore
 const DeleteCell = ({ row, table }) => {

@@ -1,10 +1,8 @@
-import { Payment } from '@/components/BudgetTable/DataTable/types';
 import { createContext } from 'react';
-import { mockData } from './utils';
 
 const DataContext = createContext({
-  data: [...mockData],
-  setData: (data: Payment[]) => {}
+  data: [],
+  setData: (data: any) => {}
 });
 
 export const DataContextProvider = DataContext.Provider;
