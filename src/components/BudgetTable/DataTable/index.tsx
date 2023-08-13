@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   ColumnDef,
   flexRender,
@@ -20,6 +20,7 @@ import {
 
 import { Button } from '../../ui/button';
 import { Input } from '../../ui/input';
+import DataContext from '../../../lib/context';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -30,6 +31,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const { setData } = useContext(DataContext);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   );
@@ -86,6 +88,10 @@ export function DataTable<TData, TValue>({
       },
     },
   });
+
+  useEffect(() => {
+    setData([...contextData]);
+  }, [contextData, setData]);
 
   return (
     <section className="flex flex-wrap flex-col w-full h-fit">
