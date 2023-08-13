@@ -73,7 +73,6 @@
 @layer base {
   * {
     @apply border-border;
-    background-color: rgba(0, 0, 0, 1)
   }
   body {
     @apply bg-background text-foreground;
