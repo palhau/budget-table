@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ColumnDef,
   flexRender,
@@ -16,19 +16,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../ui/table';
+} from '../../ui/table';
 
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
-import { MoreHorizontal } from 'lucide-react';
+import { Button } from '../../ui/button';
+import { Input } from '../../ui/input';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -43,6 +34,10 @@ export function DataTable<TData, TValue>({
     [],
   );
 
+  const [originalData, setOriginalData] = useState(() => [...data]);
+  const [contextData, setContextDate] = useState(() => [...data]);
+  const [editedRows, setEditedRows] = useState({});
+
   const table = useReactTable({
     data,
     columns,
@@ -52,6 +47,38 @@ export function DataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     state: {
       columnFilters,
+    },
+    meta: {
+      editedRows,
+      setEditedRows,
+      revertData: (rowIndex: number, revert: boolean) => {
+        if (revert) {
+          setContextDate((old) =>
+            old.map((row, index) =>
+              index === rowIndex ? originalData[rowIndex] : row,
+            ),
+          );
+        } else {
+          setOriginalData((old) =>
+            old.map((row, index) =>
+              index === rowIndex ? data[rowIndex] : row,
+            ),
+          );
+        }
+      },
+      updateData: (rowIndex: number, columnId: string, value: string) => {
+        setContextDate((old) =>
+          old.map((row, index) => {
+            if (index === rowIndex) {
+              return {
+                ...old[rowIndex],
+                [columnId]: value,
+              };
+            }
+            return row;
+          }),
+        );
+      },
     },
   });
 
