@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { Option } from './types';
-import { Input } from '../../ui/input';
+import { Option } from '../types';
+import { Input } from '../../../ui/input';
 
 //@ts-ignore
 const TableCell = ({ getValue, row, column, table }) => {
