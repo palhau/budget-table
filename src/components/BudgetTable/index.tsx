@@ -1,5 +1,6 @@
-import { DataTable } from './data-table';
-import { Payment, columns } from './columns';
+import { DataTable } from './DataTable';
+import { columns } from './DataTable/columns';
+import { Payment } from './DataTable/types';
 
 const mockData: Payment[] = [
   {
