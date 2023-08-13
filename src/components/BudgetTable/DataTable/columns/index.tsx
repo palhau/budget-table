@@ -1,7 +1,8 @@
 import { ColumnDef } from '@tanstack/react-table';
 import EditCell from './editCell';
 import TableCell from './tableCell';
-import { Payment } from './types';
+import { Payment } from '../types';
+import DeleteCell from './deleteCell';
 
 export const columns: ColumnDef<Payment>[] = [
   {
@@ -41,7 +42,13 @@ export const columns: ColumnDef<Payment>[] = [
     },
   },
   {
-    id: 'actions',
+    id: 'edit',
+    header: 'Edit',
     cell: EditCell,
+  },
+  {
+    id: 'delete',
+    header: 'Delete',
+    cell: DeleteCell,
   },
 ];

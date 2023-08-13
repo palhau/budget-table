@@ -35,7 +35,7 @@ export function DataTable<TData, TValue>({
   );
 
   const [originalData, setOriginalData] = useState(() => [...data]);
-  const [contextData, setContextDate] = useState(() => [...data]);
+  const [contextData, setContextData] = useState(() => [...data]);
   const [editedRows, setEditedRows] = useState({});
 
   const table = useReactTable({
@@ -53,7 +53,7 @@ export function DataTable<TData, TValue>({
       setEditedRows,
       revertData: (rowIndex: number, revert: boolean) => {
         if (revert) {
-          setContextDate((old) =>
+          setContextData((old) =>
             old.map((row, index) =>
               index === rowIndex ? originalData[rowIndex] : row,
             ),
@@ -67,7 +67,7 @@ export function DataTable<TData, TValue>({
         }
       },
       updateData: (rowIndex: number, columnId: string, value: string) => {
-        setContextDate((old) =>
+        setContextData((old) =>
           old.map((row, index) => {
             if (index === rowIndex) {
               return {
@@ -78,6 +78,11 @@ export function DataTable<TData, TValue>({
             return row;
           }),
         );
+      },
+      deleteRow: (rowIndex: number) => {
+        let data = contextData;
+        data.splice(rowIndex, 1);
+        setContextData([...data]);
       },
     },
   });
