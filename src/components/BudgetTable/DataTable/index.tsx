@@ -90,6 +90,10 @@ export function DataTable<TData, TValue>({
   });
 
   useEffect(() => {
+    setContextData([...data]);
+  }, [data]);
+
+  useEffect(() => {
     setData([...contextData]);
   }, [contextData, setData]);
 
