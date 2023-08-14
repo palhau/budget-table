@@ -91,11 +91,12 @@ export function DataTable<TData, TValue>({
 
   useEffect(() => {
     setContextData([...data]);
+    localStorage.setItem('personalBudgetExpenses', JSON.stringify([...data]));
   }, [data]);
 
   useEffect(() => {
     setData([...contextData]);
-  }, [contextData, setData]);
+  }, [contextData]);
 
   return (
     <section className="flex flex-wrap flex-col w-full h-fit">
