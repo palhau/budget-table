@@ -12,7 +12,7 @@ import { useContext, useState } from 'react';
 import DataContext from '../../lib/context';
 
 const initialState = {
-  id: Math.floor(Math.random() * 500),
+  id: String(Math.floor(Math.random() * 500)),
   title: '',
   type: '',
   category: '',
