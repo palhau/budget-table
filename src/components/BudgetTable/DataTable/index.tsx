@@ -96,7 +96,7 @@ export function DataTable<TData, TValue>({
 
   useEffect(() => {
     setData([...contextData]);
-  }, [contextData]);
+  }, [contextData, setData]);
 
   return (
     <section className="flex flex-wrap flex-col w-full h-fit">
